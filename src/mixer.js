@@ -31,6 +31,14 @@ class Mixer extends Component {
                 return {colors: ['purple', 'purple', 'black', 'black']}
             } else if(prevState.colors[0] === "purple" && prevState.colors[2] === "black"){
                 return {colors: ['black', 'black', 'black', 'black']}
+            } else if (prevState.colors[0] === "white" && prevState.colors[2] === "blue"){
+                return {colors: ['purple', 'purple', 'blue', 'white']}
+            } else if (prevState.colors[0] === "white" && prevState.colors[2] === "blue" && prevState.colors[3] === "blue"){
+                return {colors: ['purple', 'purple', 'blue', 'blue']}
+            } else if (prevState.colors[0] === "black" && prevState.colors[2] === "blue"){
+                return {colors: ['purple', 'purple', 'blue', 'black']}
+            } else if (prevState.colors[0] === 'black' && prevState.colors[2] === 'blue' && prevState.colors[3] === 'blue'){
+                return {colors: ['purple', 'purple', 'blue', 'blue']}
             } else {
                 return {colors: ['white', 'white', 'white', 'white']}
             }
@@ -93,20 +101,31 @@ class Mixer extends Component {
         })
     }
 
+
     render() {
         const styles = {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gridTemplateRows: "200px 200px"
+            gridTemplateRows: "200px 200px",
+            gridGap: "15px",
+            gridColumnGap: '5px',
+            transitionProperty: "all",
+            transitionDuration: ".25s"
+
+        }
+
+        const styleClick = {
+            borderRadius: "50%",
         }
 
         const colors = this.state.colors.map(color => {
             return <Square color={color} />
         })
 
+
         return (
             <div>
-                <div style={styles}>{colors}</div>
+                <div style={styles} onClick={styleClick}>{colors}</div>
                 <button onClick={this.handleBlackWhite}>Toggle Black and White</button>
                 <button onClick={this.handlePurple}>Toggle Purple</button>
                 <button onClick={this.handleBlueLeft}>Toggle Blue 1</button>
